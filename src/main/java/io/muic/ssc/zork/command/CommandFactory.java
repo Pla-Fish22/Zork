@@ -7,7 +7,7 @@ import java.util.*;
 public class CommandFactory {
 
     private static final List<Class<?>> REGISTERED_COMMANDS = Arrays.asList(ExitCommand.class,
-            HelpCommand.class, InfoCommand.class, PlayCommand.class);
+            HelpCommand.class, InfoCommand.class, PlayCommand.class, AttackCommand.class);
 
     private static final Map<String, Command> COMMAND_MAP = new HashMap<>();
 
@@ -24,8 +24,11 @@ public class CommandFactory {
         }
     }
 
-    public static Command get(String command) {
-        return COMMAND_MAP.get(command);
+    public static Command get(List<String> command) {
+        if(COMMAND_MAP.containsKey(command.get(0))){
+            return COMMAND_MAP.get(command.get(0));
+        }
+        return null;
     }
 
     public static List<String> getAllCommand() {

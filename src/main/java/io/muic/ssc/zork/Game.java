@@ -14,22 +14,43 @@ public class Game {
 
     private Command command;
 
-    public boolean isPlay = false;
+    private boolean play = false;
 
     public Room room;
+
+    private Player player = new Player();
 
     public void run(){
         while(true){
             Scanner inputReader = new Scanner(System.in);
             String input = inputReader.nextLine().toLowerCase(Locale.ROOT);
             List<String> splittedInput = commandParser.parse(input);
-            CommandFactory.get(input).commandExecute(this,gameOutput);
+            try {
+                if(commandParser.hasSecondStatement(splittedInput)){
+                    CommandFactory.get(splittedInput)
+                            .commandExecute(this, gameOutput, room, player,splittedInput.get(1));
+                }
+                else{
+                    CommandFactory.get(splittedInput)
+                            .commandExecute(this, gameOutput, room, player,null);
+                }
+            } catch (NullPointerException nullPointerException) {
+                gameOutput.println("No such Command");
+            }
         }
     }
 
     public void exit(){
         gameOutput.println("Exiting game");
         System.exit(0);
+    }
+
+    public boolean isPlay(){
+        return play;
+    }
+
+    public void switchPlay(){
+        play = !play; //switching in one place
     }
 
 }

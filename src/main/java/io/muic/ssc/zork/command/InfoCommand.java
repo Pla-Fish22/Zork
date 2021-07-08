@@ -2,6 +2,8 @@ package io.muic.ssc.zork.command;
 
 import io.muic.ssc.zork.Game;
 import io.muic.ssc.zork.GameOutput;
+import io.muic.ssc.zork.Player;
+import io.muic.ssc.zork.map.Room;
 
 public class InfoCommand implements Command{
     @Override
@@ -10,9 +12,11 @@ public class InfoCommand implements Command{
     }
 
     @Override
-    public void commandExecute(Game game, GameOutput gameOutput) {
-        if(game.isPlay){
-            gameOutput.println("Info: " + game.room.getMonster().getName() + "\n");
+    public void commandExecute(Game game, GameOutput gameOutput, Room room, Player player, String secondStatement) {
+        if(game.isPlay()){
+            gameOutput.println("Info: " + room.getMonster().getName() + "\n"
+                                        + room.getMonster().getHp()  + "\n"
+                                        + room.getMonster().getDamage());
         }
     }
 

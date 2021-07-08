@@ -1,6 +1,5 @@
 package io.muic.ssc.zork.monster;
 
-import java.util.List;
 import java.util.Random;
 
 public class Monster {
@@ -15,13 +14,13 @@ public class Monster {
     //is attacked
     private boolean isAttacked;
     //is alive
-    protected boolean isAlive;
+    protected boolean alive;
 
     protected Random random = new Random();
 
     public void initialize(){
-        this.isAlive = true;
         this.isAttacked = false;
+        this.setAlive(true);
     }
 
     public String getName(){
@@ -36,10 +35,23 @@ public class Monster {
         return this.damage;
     }
 
-    public void setDead() {
-        isAlive = false;
+    public void recieveDamage(int damageRecieve){
+        this.hp -= damageRecieve;
+        this.setAttacked(true);
+        if(this.hp < 0){
+            this.setDead();
+        }
     }
-    public void setAttacked(boolean isAttacked){
+
+    private void setDead() {
+        alive = false;
+    }
+    private void setAlive(boolean alive){this.alive = alive;}
+    public boolean isAlive(){
+        return this.alive;
+    }
+
+    private void setAttacked(boolean isAttacked){
         this.isAttacked = isAttacked;
     }
     public void attackPlayer(){

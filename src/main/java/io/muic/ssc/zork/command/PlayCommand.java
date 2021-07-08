@@ -2,6 +2,7 @@ package io.muic.ssc.zork.command;
 
 import io.muic.ssc.zork.Game;
 import io.muic.ssc.zork.GameOutput;
+import io.muic.ssc.zork.Player;
 import io.muic.ssc.zork.map.Room;
 
 public class PlayCommand implements Command{
@@ -11,8 +12,8 @@ public class PlayCommand implements Command{
     }
 
     @Override
-    public void commandExecute(Game game, GameOutput gameOutput) {
-        game.isPlay = true;
+    public void commandExecute(Game game, GameOutput gameOutput, Room room, Player player, String secondStatement) {
+        game.switchPlay();
         game.room = new Room();
     }
 
