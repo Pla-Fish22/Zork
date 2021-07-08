@@ -1,6 +1,7 @@
 package io.muic.ssc.zork.command;
 
 import io.muic.ssc.zork.Game;
+import io.muic.ssc.zork.GameOutput;
 
 public class ExitCommand implements Command {
 
@@ -11,7 +12,7 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public void commandExecute(Game game) {
+    public void commandExecute(Game game, GameOutput gameOutput) {
         game.exit();
     }
 

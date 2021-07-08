@@ -1,4 +1,4 @@
-package io.muic.ssc.zork;
+package io.muic.ssc.zork.command;
 
 import io.muic.ssc.zork.command.*;
 import java.lang.reflect.InvocationTargetException;
@@ -6,16 +6,16 @@ import java.util.*;
 
 public class CommandFactory {
 
-    private static final List<Class<? extends Command>> REGISTERED_COMMANDS = (List<Class<? extends Command>>) List.of(ExitCommand.class,
+    private static final List<Class<?>> REGISTERED_COMMANDS = Arrays.asList(ExitCommand.class,
             HelpCommand.class, InfoCommand.class, PlayCommand.class);
 
     private static final Map<String, Command> COMMAND_MAP = new HashMap<>();
 
     static {
         {
-            for (Class<? extends Command> commandClass : REGISTERED_COMMANDS) {
+            for (Class<?> commandClass : REGISTERED_COMMANDS) {
                 try {
-                    Command command = commandClass.getDeclaredConstructor().newInstance();
+                    Command command = (Command) commandClass.getDeclaredConstructor().newInstance();
                     COMMAND_MAP.put(command.getCommand(), command);
                 } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                     e.printStackTrace();

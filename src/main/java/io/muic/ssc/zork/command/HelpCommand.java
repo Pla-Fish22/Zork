@@ -1,6 +1,7 @@
 package io.muic.ssc.zork.command;
 
 import io.muic.ssc.zork.Game;
+import io.muic.ssc.zork.GameOutput;
 
 public class HelpCommand implements Command{
     @Override
@@ -9,13 +10,13 @@ public class HelpCommand implements Command{
     }
 
     @Override
-    public void commandExecute(Game game) {
+    public void commandExecute(Game game, GameOutput gameOutput) {
 
 
     }
 
     @Override
     public String getCommand() {
-        return null;
+        return "help";
     }
 }
