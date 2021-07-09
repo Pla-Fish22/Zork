@@ -16,7 +16,6 @@ public class AttackCommand implements Command{
     @Override
     public void commandExecute(Game game, GameOutput gameOutput, Room room, Player player, String secondStatement) {
         if(game.isPlay()){
-            System.out.println(room.monsterisAlive());
             if(room.monsterisAlive() && secondStatement != null) {
                 Monster monster = room.getMonster();
                 gameOutput.println("attacking " + monster.getName() +" with");
@@ -24,8 +23,16 @@ public class AttackCommand implements Command{
             }
             if(room.monsterisAlive() && secondStatement == null){
                 Monster monster = room.getMonster();
-                gameOutput.println("attacking " + monster.getName() +" with your fist");
                 monster.recieveDamage(player.getDamage());
+                player.recieveDamage(monster.getDamage());
+                gameOutput.println("Attacking " + monster.getName()
+                                                +" with your fist, doing "
+                                                + player.getDamage()
+                                                + " Damage \n" + monster.getName() +  " HP: "
+                                                + monster.getCurrentHP() + "/" + monster.getFullHP()
+                                                + "\n" + monster.getName() + " attack back doing "
+                                                + monster.getDamage() + " Damage"
+                                                + "\nHP: " + player.getCurrentHP() + "/" + player.getFullHP());
             }
 
         }

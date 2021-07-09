@@ -6,15 +6,30 @@ import io.muic.ssc.zork.monster.Monster;
 
 public class Player {
 
-    private int hp, damage, defense;
+    private int currentHP, fullHP, damage, defense;
 
     public Player(){
-        this.hp = 1650;
-        this.damage = 150;
-        this.defense = 100;
+        this.fullHP = 1650;
+        this.currentHP = 1650;
+        this.damage = 70;
+        this.defense = 0;
     }
+
 
     public int getDamage() {
         return damage;
+    }
+
+    public int getCurrentHP() {
+        return currentHP;
+    }
+
+    public int getFullHP() {
+        return fullHP;
+    }
+
+    public void recieveDamage(int damage){
+        int finalDamage = damage - this.defense;
+        this.currentHP -= finalDamage;
     }
 }

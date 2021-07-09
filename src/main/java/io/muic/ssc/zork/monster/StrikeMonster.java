@@ -12,7 +12,8 @@ public class StrikeMonster extends Monster{
         super.initialize();
         List<String> strikeNames = List.of("Necrophos", "Faceless Void", "Rek sai", "Razor");
         Random random = new Random();
-        this.hp = random.nextInt(500 - 250) + 250;
+        this.fullHP  = random.nextInt(500 - 250) + 250;
+        this.currentHP = this.fullHP;
         this.name = strikeNames.get(random.nextInt(strikeNames.size()));
         this.damage = random.nextInt(450 - 250) + 250;
     }

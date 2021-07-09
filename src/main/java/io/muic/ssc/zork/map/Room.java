@@ -25,25 +25,21 @@ public class Room {
         return monster;
     }
 
-    public String getRoomDetails(){
-        String itemsDetail = getItemsDetail();
-        String monsterdetails= getMonsterDetails();
-        return itemsDetail + monsterdetails;
-    }
-
-    private String getMonsterDetails(){
+    public String getMonsterDetails(){
         StringBuffer monsterDetails = new StringBuffer();
         monsterDetails.append("Monster:\n");
         monsterDetails.append("     name: ");
         monsterDetails.append(monster.getName());
         monsterDetails.append("\n     HP: ");
-        monsterDetails.append(monster.getHp());
+        monsterDetails.append(monster.getCurrentHP());
+        monsterDetails.append("/");
+        monsterDetails.append(monster.getFullHP());
         monsterDetails.append("\n     Damage: ");
         monsterDetails.append(monster.getDamage());
         return monsterDetails.toString();
     }
 
-    private String getItemsDetail(){
+    public String getItemsDetail(){
         StringBuffer itemsDetail = new StringBuffer();
         Set<String> itemNames = stringItemMap.keySet();
         itemsDetail.append("Items:\n");

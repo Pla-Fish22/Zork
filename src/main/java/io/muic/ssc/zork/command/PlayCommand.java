@@ -13,8 +13,14 @@ public class PlayCommand implements Command{
 
     @Override
     public void commandExecute(Game game, GameOutput gameOutput, Room room, Player player, String secondStatement) {
-        game.switchPlay();
-        game.room = new Room();
+        if(!game.isPlay()){
+            game.switchPlay();
+            game.room = new Room();
+            gameOutput.printInGameCommands();
+        }
+        else{
+            gameOutput.println("Game is already started");
+        }
     }
 
     @Override

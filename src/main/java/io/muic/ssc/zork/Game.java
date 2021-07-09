@@ -21,6 +21,8 @@ public class Game {
     private Player player = new Player();
 
     public void run(){
+        gameOutput.printWelcome();
+        gameOutput.printNotInGameCommands();
         while(true){
             Scanner inputReader = new Scanner(System.in);
             String input = inputReader.nextLine().toLowerCase(Locale.ROOT);

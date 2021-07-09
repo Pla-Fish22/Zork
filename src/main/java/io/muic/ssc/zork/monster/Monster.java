@@ -1,23 +1,22 @@
 package io.muic.ssc.zork.monster;
 
-import java.util.Random;
+import io.muic.ssc.zork.Player;
 
 public class Monster {
 
     //protected Room room;
-    //hp of monster
-    protected int hp;
+    //Full hp of monster
+    protected int fullHP;
+    //current hp of monster
+    protected int currentHP;
     //damage of monster
     protected int damage;
     //name of monster
     protected String name;
-    //is attacked
-    private boolean isAttacked;
     //is alive
     protected boolean alive;
 
     public void initialize(){
-        this.isAttacked = false;
         this.setAlive(true);
     }
 
@@ -25,8 +24,12 @@ public class Monster {
         return this.name;
     }
 
-    public int getHp(){
-        return this.hp;
+    public int getFullHP(){
+        return this.fullHP;
+    }
+
+    public int getCurrentHP() {
+        return currentHP;
     }
 
     public int getDamage(){
@@ -34,10 +37,10 @@ public class Monster {
     }
 
     public void recieveDamage(int damageRecieve){
-        this.hp -= damageRecieve;
-        this.setAttacked(true);
-        if(this.hp < 0){
+        this.currentHP -= damageRecieve;
+        if(this.currentHP < 0){
             this.setDead();
+            return;
         }
     }
 
@@ -47,16 +50,6 @@ public class Monster {
     private void setAlive(boolean alive){this.alive = alive;}
     public boolean isAlive(){
         return this.alive;
-    }
-
-    private void setAttacked(boolean isAttacked){
-        this.isAttacked = isAttacked;
-    }
-    public void attackPlayer(){
-        if(this.isAttacked == true){
-            //attack back to player
-
-        }
     }
 
 }
