@@ -16,8 +16,6 @@ public class Monster {
     //is alive
     protected boolean alive;
 
-    protected Random random = new Random();
-
     public void initialize(){
         this.isAttacked = false;
         this.setAlive(true);

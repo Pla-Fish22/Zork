@@ -14,9 +14,7 @@ public class InfoCommand implements Command{
     @Override
     public void commandExecute(Game game, GameOutput gameOutput, Room room, Player player, String secondStatement) {
         if(game.isPlay()){
-            gameOutput.println("Info: " + room.getMonster().getName() + "\n"
-                                        + room.getMonster().getHp()  + "\n"
-                                        + room.getMonster().getDamage());
+            gameOutput.printRoomDetails(room);
         }
     }
 
@@ -24,4 +22,6 @@ public class InfoCommand implements Command{
     public String getCommand() {
         return "info";
     }
+
+
 }

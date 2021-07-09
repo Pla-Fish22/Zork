@@ -24,7 +24,7 @@ public class AttackCommand implements Command{
             }
             if(room.monsterisAlive() && secondStatement == null){
                 Monster monster = room.getMonster();
-                gameOutput.println("attacking " + monster.getName() +"with your fist");
+                gameOutput.println("attacking " + monster.getName() +" with your fist");
                 monster.recieveDamage(player.getDamage());
             }
 
