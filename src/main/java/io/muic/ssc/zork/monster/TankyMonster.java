@@ -14,7 +14,7 @@ public class TankyMonster extends Monster{
         this.fullHP = random.nextInt(1000 - 650) + 650;
         this.currentHP = this.fullHP;
         this.name = tankyNames.get(random.nextInt(tankyNames.size()));
-        this.damage = random.nextInt(270-120) + 120;
+        this.damage = random.nextInt(400 - 150) + 150;
     }
 
 }

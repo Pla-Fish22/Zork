@@ -26,7 +26,7 @@ public class Room {
     }
 
     public String getMonsterDetails(){
-        StringBuffer monsterDetails = new StringBuffer();
+        StringBuilder monsterDetails = new StringBuilder();
         monsterDetails.append("Monster:\n");
         monsterDetails.append("     name: ");
         monsterDetails.append(monster.getName());
@@ -36,11 +36,12 @@ public class Room {
         monsterDetails.append(monster.getFullHP());
         monsterDetails.append("\n     Damage: ");
         monsterDetails.append(monster.getDamage());
+        monsterDetails.append("\n");
         return monsterDetails.toString();
     }
 
     public String getItemsDetail(){
-        StringBuffer itemsDetail = new StringBuffer();
+        StringBuilder itemsDetail = new StringBuilder();
         Set<String> itemNames = stringItemMap.keySet();
         itemsDetail.append("Items:\n");
         for(String itemName : itemNames){
@@ -80,7 +81,7 @@ public class Room {
         monster = MonsterFactory.createMonster(MonsterType.TANKYMONSTER);
     }
     private Map placeItems(){
-        int numberOfItems = random.nextInt(4 - 1) + 1;
+        int numberOfItems = random.nextInt(4 - 1) + 5;
         Map<String, Item> stringItemMap = new HashMap<>();
         ItemType[] itemTypes = ItemType.values();
         for(int idx = 0; idx < numberOfItems; idx++){
@@ -91,5 +92,10 @@ public class Room {
         return stringItemMap;
 
 
+    }
+    public Item takeItem(String itemName){
+        Item item = stringItemMap.get(itemName);
+        stringItemMap.remove(itemName);
+        return item;
     }
 }

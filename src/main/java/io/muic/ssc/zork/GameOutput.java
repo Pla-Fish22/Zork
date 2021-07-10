@@ -1,6 +1,8 @@
 package io.muic.ssc.zork;
 
+import io.muic.ssc.zork.Item.Weapon;
 import io.muic.ssc.zork.map.Room;
+import io.muic.ssc.zork.monster.Monster;
 
 public class GameOutput {
 
@@ -48,5 +50,56 @@ public class GameOutput {
             println(room.getMonsterDetails());
         }
     }
+    public void printPlayerDetails(Player player){
+        println(player.getPlayerDetails());
+        println(player.getWeaponsDetail());
+        println(player.getPotionsDetail());
+    }
+    public void battlingStatus(Player player, Monster monster){
+        stringBuilder = new StringBuilder();
+        stringBuilder.append("Attacking ");
+        stringBuilder.append(monster.getName());
+        stringBuilder.append(" with your fist, doing ");
+        stringBuilder.append(player.getDamage());
+        stringBuilder.append(" Damage\n");
+        stringBuilder.append(monster.getName());
+        stringBuilder.append(" HP: ");
+        stringBuilder.append(monster.getCurrentHP());
+        stringBuilder.append("/");
+        stringBuilder.append(monster.getFullHP());
+        stringBuilder.append("\n");
+        stringBuilder.append(monster.getName());
+        stringBuilder.append(" attack back doing ");
+        stringBuilder.append(player.getFinalDamage(monster.getDamage()));
+        stringBuilder.append(" Damage\nHP: ");
+        stringBuilder.append(player.getCurrentHP());
+        stringBuilder.append("/");
+        stringBuilder.append(player.getFullHP());
+        println(stringBuilder.toString());
+    }
+    public void battlingStatus(Player player, Monster monster, Weapon weapon){
+        stringBuilder = new StringBuilder();
+        stringBuilder.append("Attacking ");
+        stringBuilder.append(monster.getName());
+        stringBuilder.append(" with ");
+        stringBuilder.append(weapon.getName());
+        stringBuilder.append(" doing ");
+        stringBuilder.append(weapon.getDamage());
+        stringBuilder.append(" Damage\n");
+        stringBuilder.append(monster.getName());
+        stringBuilder.append(" HP: ");
+        stringBuilder.append(monster.getCurrentHP());
+        stringBuilder.append("/");
+        stringBuilder.append(monster.getFullHP());
+        stringBuilder.append("\n");
+        stringBuilder.append(monster.getName());
+        stringBuilder.append(" attack back doing ");
+        stringBuilder.append(player.getFinalDamage(monster.getDamage()));
+        stringBuilder.append(" Damage\nHP: ");
+        stringBuilder.append(player.getCurrentHP());
+        stringBuilder.append("/");
+        stringBuilder.append(player.getFullHP());
+        println(stringBuilder.toString());
 
+    }
 }

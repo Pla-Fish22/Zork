@@ -5,15 +5,19 @@ import java.util.List;
 public class Potion extends Item{
     private int hpRestore;
 
-
     public void initialize(){
         setHpRestore();
-        this.name = "Potion";
+        setName();
     }
 
     private void setHpRestore(){this.hpRestore = random.nextInt(300 - 100) + 100;}
 
     public int getHpRestore() {
         return hpRestore;
+    }
+
+    private void setName(){
+        List<String> potionNames = List.of("Elixir", "Holy Water", "Potion");
+        this.name = potionNames.get(random.nextInt(potionNames.size()));
     }
 }

@@ -15,6 +15,6 @@ public class StrikeMonster extends Monster{
         this.fullHP  = random.nextInt(500 - 250) + 250;
         this.currentHP = this.fullHP;
         this.name = strikeNames.get(random.nextInt(strikeNames.size()));
-        this.damage = random.nextInt(450 - 250) + 250;
+        this.damage = random.nextInt(800 - 350) + 350;
     }
 }

@@ -25,17 +25,11 @@ public class Game {
         gameOutput.printNotInGameCommands();
         while(true){
             Scanner inputReader = new Scanner(System.in);
-            String input = inputReader.nextLine().toLowerCase(Locale.ROOT);
+            String input = inputReader.nextLine();
             List<String> splittedInput = commandParser.parse(input);
             try {
-                if(commandParser.hasSecondStatement(splittedInput)){
-                    CommandFactory.get(splittedInput)
-                            .commandExecute(this, gameOutput, room, player,splittedInput.get(1));
-                }
-                else{
-                    CommandFactory.get(splittedInput)
-                            .commandExecute(this, gameOutput, room, player,null);
-                }
+                CommandFactory.get(splittedInput)
+                              .commandExecute(this, gameOutput, room, player,splittedInput);
             } catch (NullPointerException nullPointerException) {
                 gameOutput.println("No such Command");
             }

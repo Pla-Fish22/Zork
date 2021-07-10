@@ -14,7 +14,5 @@ public class CommandParser {
         List<String> strings = List.of(inputLine.split(" ")); // split into Array and forced into list
         return strings;
     }
-    public boolean hasSecondStatement(List strings){
-        return strings.size() > 1;
-    }
+
 }
