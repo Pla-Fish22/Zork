@@ -1,6 +1,8 @@
 package io.muic.ssc.zork;
 
+import io.muic.ssc.zork.Item.Potion;
 import io.muic.ssc.zork.Item.Weapon;
+import io.muic.ssc.zork.map.GameMap;
 import io.muic.ssc.zork.map.Room;
 import io.muic.ssc.zork.monster.Monster;
 
@@ -22,6 +24,16 @@ public class GameOutput {
                 "        \\/                \\/\n");
         stringBuilder.append("Welcome To Zork!\n");
         println(stringBuilder.toString());
+        printNotInGameCommands();
+        println("Available maps: Mystery Castle, Ancient Prison, Wizard School");
+    }
+    public void printGameStart(GameMap map, Player player){
+        stringBuilder = new StringBuilder();
+        stringBuilder.append("Started on map: ");
+        stringBuilder.append(map.getMapName());
+        println(stringBuilder.toString());
+        printRoomDetails(player.getCurrentRoom());
+        printPlayerDetails(player);
     }
     public void printNotInGameCommands(){
         stringBuilder = new StringBuilder();
@@ -45,6 +57,8 @@ public class GameOutput {
         println(stringBuilder.toString());
     }
     public void printRoomDetails(Room room){
+        println("You are in " + room.getName());
+        println(room.getExitsDetails());
         println(room.getItemsDetail());
         if(room.monsterisAlive()){
             println(room.getMonsterDetails());
@@ -55,7 +69,7 @@ public class GameOutput {
         println(player.getWeaponsDetail());
         println(player.getPotionsDetail());
     }
-    public void battlingStatus(Player player, Monster monster){
+    public void printBattlingStatus(Player player, Monster monster){
         stringBuilder = new StringBuilder();
         stringBuilder.append("Attacking ");
         stringBuilder.append(monster.getName());
@@ -77,7 +91,7 @@ public class GameOutput {
         stringBuilder.append(player.getFullHP());
         println(stringBuilder.toString());
     }
-    public void battlingStatus(Player player, Monster monster, Weapon weapon){
+    public void printBattlingStatus(Player player, Monster monster, Weapon weapon){
         stringBuilder = new StringBuilder();
         stringBuilder.append("Attacking ");
         stringBuilder.append(monster.getName());
@@ -102,4 +116,17 @@ public class GameOutput {
         println(stringBuilder.toString());
 
     }
+    public void printUsingItem(Player player, Potion potion){
+        stringBuilder = new StringBuilder();
+        stringBuilder.append("Using ");
+        stringBuilder.append(potion.getName());
+        stringBuilder.append(" to heal healing ");
+        stringBuilder.append(potion.getHpRestore());
+        stringBuilder.append(", current HP");
+        stringBuilder.append(player.getCurrentHP());
+        stringBuilder.append("/");
+        stringBuilder.append(player.getFullHP());
+        println(stringBuilder.toString());
+    }
+
 }

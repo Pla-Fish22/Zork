@@ -1,6 +1,7 @@
 package io.muic.ssc.zork;
 
 import io.muic.ssc.zork.Item.*;
+import io.muic.ssc.zork.map.Room;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ public class Player {
     private Map<String, Potion> potionBag;
     private Armor armor;
     private boolean isArmed;
+    private Room currentRoom;
 
     public Player(){
         this.fullHP = 1650;
@@ -52,7 +54,12 @@ public class Player {
 
     public void takePotion(Potion potion){ potionBag.put(potion.getName(), potion);}
 
-    public void usePotion(String potionName){
+    public Potion usePotion(String potionName){
+        Potion potion = potionBag.get(potionName);
+        potionBag.remove(potionName);
+        this.currentHP = this.currentHP + potion.getHpRestore() < this.fullHP ? this.currentHP + potion.getHpRestore() :
+                                                                  this.fullHP;
+        return potion;
     }
 
     public void wearArmor(Armor armor){
@@ -64,6 +71,7 @@ public class Player {
     public int getFinalDamage(int damage){
         return damage - this.defense > 0 ? damage - this.defense : 0 ;
     }
+
     public void recieveDamage(int damage){
         int finalDamage = getFinalDamage(damage);
         if(finalDamage > 0){
@@ -123,4 +131,17 @@ public class Player {
         }
         return playerDetails.toString();
     }
+
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public void heal(){
+        currentHP = currentHP + 50 < fullHP ? currentHP + 50 : fullHP;
+    }
 }
+

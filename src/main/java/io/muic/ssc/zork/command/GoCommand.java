@@ -4,11 +4,11 @@ import io.muic.ssc.zork.Game;
 import io.muic.ssc.zork.GameOutput;
 import io.muic.ssc.zork.Player;
 import io.muic.ssc.zork.map.GameMap;
-import io.muic.ssc.zork.map.MapFactory;
+import io.muic.ssc.zork.map.Room;
 
 import java.util.List;
 
-public class PlayCommand implements Command{
+public class GoCommand implements Command{
     @Override
     public int wordCount(List<String> statements) {
         return 0;
@@ -16,27 +16,22 @@ public class PlayCommand implements Command{
 
     @Override
     public void commandExecute(Game game, GameOutput gameOutput, GameMap map, Player player, List<String> statements) {
-        if(!game.isPlay()){
-            String mapName = makeSubject(statements.subList(1,statements.size()));
-            map = MapFactory.get(mapName);
-            if(map == null) {
-                map = MapFactory.get("mystery castle");
-                game.setMap(map);
+        if(game.isPlay()){
+            String exit = makeSubject(statements.subList(1, statements.size()));
+            Room goRoom = player.getCurrentRoom().getExit(exit);
+            player.setCurrentRoom(goRoom);
+            gameOutput.println("Go to " + player.getCurrentRoom().getName());
+            if(!player.getCurrentRoom().monsterisAlive()){
+                player.getCurrentRoom().respawnMonster();
             }
-            game.setMap(map);
-            player.setCurrentRoom(map.getDefault());
-            game.switchPlay();
-            gameOutput.printInGameCommands();
-            gameOutput.printGameStart(map, player);
-        }
-        else{
-            gameOutput.println("Game is already started");
+            player.getCurrentRoom().replaceItem();
+            player.heal();
         }
     }
 
     @Override
     public String getCommand() {
-        return "play";
+        return "go";
     }
 
     @Override

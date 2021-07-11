@@ -1,10 +1,9 @@
 package io.muic.ssc.zork;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
+
 import io.muic.ssc.zork.command.*;
-import io.muic.ssc.zork.map.Room;
+import io.muic.ssc.zork.map.GameMap;
 
 public class Game {
 
@@ -16,20 +15,22 @@ public class Game {
 
     private boolean play = false;
 
-    public Room room;
-
     private Player player = new Player();
+
+    private GameMap map;
+
+    private Map<String, SaveGame> saveGameHashMap;
 
     public void run(){
         gameOutput.printWelcome();
-        gameOutput.printNotInGameCommands();
+        saveGameHashMap = new HashMap<>();
         while(true){
             Scanner inputReader = new Scanner(System.in);
             String input = inputReader.nextLine();
             List<String> splittedInput = commandParser.parse(input);
             try {
                 CommandFactory.get(splittedInput)
-                              .commandExecute(this, gameOutput, room, player,splittedInput);
+                              .commandExecute(this, gameOutput, map, player,splittedInput);
             } catch (NullPointerException nullPointerException) {
                 gameOutput.println("No such Command");
             }
@@ -47,6 +48,21 @@ public class Game {
 
     public void switchPlay(){
         play = !play; //switching in one place
+    }
+
+    public void saveGame(String saveName){
+        SaveGame save = new SaveGame(map, player);
+        saveGameHashMap.put(saveName, save);
+    }
+
+    public void loadGame(String savename){
+        player = saveGameHashMap.get(savename).getPlayer();
+        map = saveGameHashMap.get(savename).getMap();
+        gameOutput.printGameStart(map, player);
+    }
+
+    public void setMap(GameMap map){
+        this.map = map;
     }
 
 }

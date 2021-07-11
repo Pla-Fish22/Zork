@@ -3,7 +3,7 @@ package io.muic.ssc.zork.command;
 import io.muic.ssc.zork.Game;
 import io.muic.ssc.zork.GameOutput;
 import io.muic.ssc.zork.Player;
-import io.muic.ssc.zork.map.Room;
+import io.muic.ssc.zork.map.GameMap;
 
 import java.util.List;
 
@@ -14,8 +14,13 @@ public class HelpCommand implements Command{
     }
 
     @Override
-    public void commandExecute(Game game, GameOutput gameOutput, Room room, Player player, List<String> statements) {
-
+    public void commandExecute(Game game, GameOutput gameOutput, GameMap map, Player player, List<String> statements) {
+        if(game.isPlay()){
+            gameOutput.printInGameCommands();
+        }
+        else{
+            gameOutput.printNotInGameCommands();
+        }
 
     }
 

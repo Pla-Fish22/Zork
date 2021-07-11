@@ -1,13 +1,13 @@
 package io.muic.ssc.zork.command;
 
-import io.muic.ssc.zork.command.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class CommandFactory {
 
     private static final List<Class<?>> REGISTERED_COMMANDS = Arrays.asList(ExitCommand.class,
-            HelpCommand.class, InfoCommand.class, PlayCommand.class, AttackCommand.class, TakeCommand.class);
+            HelpCommand.class, InfoCommand.class, PlayCommand.class, AttackCommand.class, TakeCommand.class,
+            UseCommand.class, SaveCommand.class, LoadCommand.class, QuitCommand.class, GoCommand.class);
 
     private static final Map<String, Command> COMMAND_MAP = new HashMap<>();
 
@@ -31,7 +31,4 @@ public class CommandFactory {
         return null;
     }
 
-    public static List<String> getAllCommand() {
-        return new ArrayList<>(COMMAND_MAP.keySet());
-    }
 }

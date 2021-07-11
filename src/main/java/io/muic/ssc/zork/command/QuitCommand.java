@@ -7,9 +7,7 @@ import io.muic.ssc.zork.map.GameMap;
 
 import java.util.List;
 
-public class ExitCommand implements Command {
-
-
+public class QuitCommand implements Command{
     @Override
     public int wordCount(List<String> statements) {
         return 0;
@@ -17,12 +15,15 @@ public class ExitCommand implements Command {
 
     @Override
     public void commandExecute(Game game, GameOutput gameOutput, GameMap map, Player player, List<String> statements) {
-        if(!game.isPlay()){gameOutput.println("Exiting...");game.exit();}
+        if(game.isPlay()){
+            game.switchPlay();
+            gameOutput.println("Quiting Zork...");
+        }
     }
 
     @Override
     public String getCommand() {
-        return "exit";
+        return "quit";
     }
 
     @Override

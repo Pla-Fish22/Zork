@@ -4,7 +4,7 @@ import io.muic.ssc.zork.Game;
 import io.muic.ssc.zork.GameOutput;
 import io.muic.ssc.zork.Item.Weapon;
 import io.muic.ssc.zork.Player;
-import io.muic.ssc.zork.map.Room;
+import io.muic.ssc.zork.map.GameMap;
 import io.muic.ssc.zork.monster.Monster;
 
 import java.util.List;
@@ -17,25 +17,24 @@ public class AttackCommand implements Command{
     }
 
     @Override
-    public void commandExecute(Game game, GameOutput gameOutput, Room room, Player player, List<String> statements) {
+    public void commandExecute(Game game, GameOutput gameOutput, GameMap map, Player player, List<String> statements) {
         if(game.isPlay()){
-            if(room.monsterisAlive() && statements.contains("with")) {
-                Monster monster = room.getMonster();
+            if(player.getCurrentRoom().monsterisAlive() && statements.contains("with")) {
+                Monster monster = player.getCurrentRoom().getMonster();
                 String weaponName = makeSubject(statements.subList(2, statements.size()));
                 Weapon weapon = player.getWeapon(weaponName);
                 monster.recieveDamage(weapon.getDamage());
                 player.recieveDamage(monster.getDamage());
-                gameOutput.battlingStatus(player, monster, weapon);
+                gameOutput.printBattlingStatus(player, monster, weapon);
                 return;
             }
-            if(room.monsterisAlive() && !statements.contains("with")){
-                Monster monster = room.getMonster();
+            if(player.getCurrentRoom().monsterisAlive() && !statements.contains("with")){
+                Monster monster = player.getCurrentRoom().getMonster();
                 monster.recieveDamage(player.getDamage());
                 player.recieveDamage(monster.getDamage());
-                gameOutput.battlingStatus(player, monster);
+                gameOutput.printBattlingStatus(player, monster);
                 return;
             }
-
         }
     }
 

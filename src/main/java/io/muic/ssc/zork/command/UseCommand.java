@@ -2,46 +2,30 @@ package io.muic.ssc.zork.command;
 
 import io.muic.ssc.zork.Game;
 import io.muic.ssc.zork.GameOutput;
-import io.muic.ssc.zork.Item.Armor;
-import io.muic.ssc.zork.Item.Item;
 import io.muic.ssc.zork.Item.Potion;
-import io.muic.ssc.zork.Item.Weapon;
 import io.muic.ssc.zork.Player;
 import io.muic.ssc.zork.map.GameMap;
 
-
 import java.util.List;
 
-public class TakeCommand implements Command{
+public class UseCommand implements Command{
     @Override
     public int wordCount(List<String> statements) {
-        return statements.size();
+        return 0;
     }
 
     @Override
     public void commandExecute(Game game, GameOutput gameOutput, GameMap map, Player player, List<String> statements) {
-        if(game.isPlay()) {
-            String choice = makeSubject(statements.subList(1, statements.size()));
-            gameOutput.println("taking " + choice);
-            Item item = player.getCurrentRoom().takeItem(choice);
-            if (item instanceof Armor) {
-                Armor armor = (Armor) item;
-                player.wearArmor(armor);
-            }
-            if (item instanceof Weapon) {
-                Weapon weapon = (Weapon) item;
-                player.takeWeapon(weapon);
-            }
-            if (item instanceof Potion) {
-                Potion potion = (Potion) item;
-                player.takePotion(potion);
-            }
+        if(game.isPlay()){
+            String potionName = makeSubject(statements.subList(1, statements.size()));
+            Potion potion = player.usePotion(potionName);
+            gameOutput.printUsingItem(player, potion);
         }
     }
 
     @Override
     public String getCommand() {
-        return "take";
+        return "use";
     }
 
     @Override
@@ -55,6 +39,4 @@ public class TakeCommand implements Command{
         }
         return choiceMaker.toString();
     }
-
-
 }

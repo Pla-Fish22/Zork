@@ -4,11 +4,10 @@ import io.muic.ssc.zork.Game;
 import io.muic.ssc.zork.GameOutput;
 import io.muic.ssc.zork.Player;
 import io.muic.ssc.zork.map.GameMap;
-import io.muic.ssc.zork.map.MapFactory;
 
 import java.util.List;
 
-public class PlayCommand implements Command{
+public class LoadCommand implements Command{
     @Override
     public int wordCount(List<String> statements) {
         return 0;
@@ -17,26 +16,18 @@ public class PlayCommand implements Command{
     @Override
     public void commandExecute(Game game, GameOutput gameOutput, GameMap map, Player player, List<String> statements) {
         if(!game.isPlay()){
-            String mapName = makeSubject(statements.subList(1,statements.size()));
-            map = MapFactory.get(mapName);
-            if(map == null) {
-                map = MapFactory.get("mystery castle");
-                game.setMap(map);
-            }
-            game.setMap(map);
-            player.setCurrentRoom(map.getDefault());
-            game.switchPlay();
-            gameOutput.printInGameCommands();
+            gameOutput.println("Loading...");
+            String saveName = makeSubject(statements.subList(1,statements.size()));
+            game.loadGame(saveName);
+            gameOutput.println("Done");
             gameOutput.printGameStart(map, player);
-        }
-        else{
-            gameOutput.println("Game is already started");
+            game.switchPlay();
         }
     }
 
     @Override
     public String getCommand() {
-        return "play";
+        return "load";
     }
 
     @Override
