@@ -20,7 +20,6 @@ public class LoadCommand implements Command{
             String saveName = makeSubject(statements.subList(1,statements.size()));
             game.loadGame(saveName);
             gameOutput.println("Done");
-            gameOutput.printGameStart(map, player);
             game.switchPlay();
         }
     }
