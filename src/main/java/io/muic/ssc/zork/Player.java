@@ -28,6 +28,10 @@ public class Player {
     }
 
 
+    public void setCurrentHP(int currentHP) {
+        this.currentHP = currentHP;
+    }
+
     public int getDamage() {
         return damage;
     }
@@ -81,6 +85,22 @@ public class Player {
 
     public Weapon getWeapon(String weapon){
         return weaponHolster.get(weapon);
+    }
+
+    public Map<String, Weapon> getWeaponHolster() {
+        return weaponHolster;
+    }
+
+    public void setWeaponHolster(Map<String, Weapon> weaponHolster) {
+        this.weaponHolster = weaponHolster;
+    }
+
+    public Map<String, Potion> getPotionBag() {
+        return potionBag;
+    }
+
+    public void setPotionBag(Map<String, Potion> potionBag) {
+        this.potionBag = potionBag;
     }
 
     public String getWeaponsDetail(){
@@ -138,6 +158,14 @@ public class Player {
 
     public Room getCurrentRoom() {
         return currentRoom;
+    }
+
+    public void setArmed(boolean armed) {
+        isArmed = armed;
+    }
+
+    public boolean isArmed() {
+        return isArmed;
     }
 
     public void heal(){

@@ -1,14 +1,16 @@
 package io.muic.ssc.zork.map;
 
 
+import java.util.List;
+
 public interface GameMap {
 
 
     String getMapName();
 
-    Room enterRoom(String direction);
+    void setRooms(List rooms);
 
-    GameMap getRoomMap();
+    List getRooms();
 
     Room getDefault();
 

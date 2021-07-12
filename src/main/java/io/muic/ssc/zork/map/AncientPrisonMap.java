@@ -45,14 +45,15 @@ public class AncientPrisonMap implements GameMap {
     }
 
     @Override
-    public Room enterRoom(String direction) {
-        return null;
+    public void setRooms(List rooms) {
+        this.rooms = rooms;
     }
 
     @Override
-    public GameMap getRoomMap() {
-        return null;
+    public List getRooms() {
+        return rooms;
     }
+
 
     @Override
     public Room getDefault() {

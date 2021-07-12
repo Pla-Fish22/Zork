@@ -6,6 +6,7 @@ public class MysteryCastleMap implements GameMap {
 
     private List<Room> rooms;
 
+
     public MysteryCastleMap() {
         Room mainHall, kitchen, hallWay, bedroom, garden, balcony, fountain, spookyRoom, trainingArea;
 
@@ -46,19 +47,22 @@ public class MysteryCastleMap implements GameMap {
     }
 
     @Override
-    public Room enterRoom(String direction) {
-        return null;
+    public void setRooms(List rooms) {
+        this.rooms = rooms;
     }
 
     @Override
-    public GameMap getRoomMap() {
-        return null;
+    public List getRooms() {
+        return rooms;
     }
+
 
     @Override
     public Room getDefault() {
         return rooms.get(0);
     }
+
+
 
 
 }
