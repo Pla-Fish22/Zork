@@ -171,5 +171,32 @@ public class Player {
     public void heal(){
         currentHP = currentHP + 50 < fullHP ? currentHP + 50 : fullHP;
     }
+
+    public void dropWeapon(String weaponName){
+        try {
+            weaponHolster.remove(weaponName);
+        }catch (NullPointerException nullPointerException){
+            System.out.println("No weapon to drop");
+        }
+    }
+
+    public void dropArmor(String armorName){
+        if(isArmed && armorName.equals(armor.getName())){
+            armor = null;
+            defense = 0;
+            setArmed(false);
+        }
+        else{
+            System.out.println("No armor to drop");
+        }
+    }
+
+    public void dropPotion(String potionName){
+        try {
+            potionBag.remove(potionName);
+        }catch (NullPointerException nullPointerException){
+            System.out.println("No potion to drop");
+        }
+    }
 }
 
